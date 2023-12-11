@@ -7,7 +7,6 @@ use std::path::Path;
 
 #[derive(Debug)]
 struct Game {
-    pub id: i32,
     pub max_blue: i32,
     pub max_red: i32,
     pub max_green: i32,
@@ -24,7 +23,7 @@ fn main() {
         let line = line.expect("line should be valid");
         let parts = line.split(": ").collect::<Vec<_>>();
 
-        let id = id_re
+        let _id = id_re
             .find(parts[0])
             .expect("should have an id")
             .as_str()
@@ -32,7 +31,6 @@ fn main() {
             .expect("id should be a number");
 
         let mut game = Game {
-            id,
             max_blue: 0,
             max_red: 0,
             max_green: 0,
