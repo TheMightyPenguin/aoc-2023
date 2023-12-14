@@ -42,18 +42,19 @@ fn get_sequence_value(first_seq: Vec<i64>) -> i64 {
         sequences.push(new_seq);
         last_seq = &sequences[sequences.len() - 1];
     }
-    let last_seq = sequences.last_mut().unwrap();
+    let last_seq: &mut Vec<i64> = sequences.last_mut().unwrap();
     last_seq.push(0);
 
     
     for index in (0..(sequences.len() - 1)).rev() {
-        let prev_last = *sequences[index + 1].last().unwrap();
-        let current_last = *sequences[index].last().unwrap();
-        sequences[index].push(prev_last + current_last);
+        let prev_last = *sequences[index + 1].first().unwrap();
+        let current_last = *sequences[index].first().unwrap();
+        // sequences[index].push(current_last - prev_last);
+        sequences[index].insert(0, current_last - prev_last);
     }
-    println!("sequences after processing {:?}", sequences);
+    // println!("sequences after processing {:?}", sequences);
 
-    let val = *sequences.first().unwrap().last().unwrap();
+    let val = *sequences.first().unwrap().first().unwrap();
     val
 }
 
